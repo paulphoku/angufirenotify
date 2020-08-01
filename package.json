@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postbuild": "ng build --prod",
+    "start:prod": "node server.js"
   },
   "private": true,
   "dependencies": {
@@ -22,11 +24,14 @@
     "@angular/pwa": "^0.1000.5",
     "@angular/router": "~10.0.5",
     "@angular/service-worker": "^10.0.7",
+    "express": "^4.17.1",
     "firebase": "^7.17.1",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.10.3",
+    "@angular/cli": "~10.0.4",
+    "@angular/compiler-cli": "~10.0.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.4",
