@@ -5,6 +5,7 @@ import { AngularFireMessaging } from '@angular/fire/messaging';
 import { mergeMapTo } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { ApisService } from './apis.service';
 
 @Injectable()
 export class MessagingService {
@@ -12,9 +13,11 @@ export class MessagingService {
   currentMessage = new BehaviorSubject(null);
 
   constructor(
+    private apis: ApisService,
     private angularFireDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
-    private angularFireMessaging: AngularFireMessaging) {
+    private angularFireMessaging: AngularFireMessaging
+    ) {
     this.angularFireMessaging.messaging.subscribe(
       // tslint:disable-next-line:variable-name
       (_messaging) => {
@@ -49,6 +52,7 @@ export class MessagingService {
     this.angularFireMessaging.requestToken.subscribe(
       (token) => {
         console.log(token);
+        this.apis.usr_token = token;
         this.updateToken(userId, token);
       },
       (err) => {
@@ -56,6 +60,7 @@ export class MessagingService {
       }
     );
   }
+  
 
   /**
    * hook method when new notification received in foreground
@@ -68,3 +73,4 @@ export class MessagingService {
       });
   }
 }
+

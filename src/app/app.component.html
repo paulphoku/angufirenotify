@@ -1,3 +1,39 @@
-<router-outlet></router-outlet>
 
-{{ message | async | json }}
+<p>{{ message | async | json }}</p>
+<div class="w3-container" align="center">
+    <div class="">
+        <br>
+        <form [formGroup]="regForm" (ngSubmit)="register()">
+            <div *ngIf="setError" class="text-center alert alert-danger">{{setError}}</div>
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="usr_fname" required placeholder="First Name">
+                <span class="text-danger"
+                    *ngIf="(usr_fname.dirty || usr_fname.touched) && usr_fname.invalid && usr_fname.errors.required">
+                    First Name is required.
+                </span>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="usr_lname" required placeholder="Last Name">
+                <span class="text-danger"
+                    *ngIf="(usr_lname.dirty || usr_lname.touched) && usr_lname.invalid && usr_lname.errors.required">
+                    Last Name is required.
+                </span>
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" formControlName="usr_tel" required placeholder="Mobile Number">
+                <span class="text-danger"
+                    *ngIf="(usr_tel.dirty || usr_tel.touched) && usr_tel.invalid && usr_tel.errors.required">
+                    Mobile Number is required.
+                </span>
+                <!-- <span class="text-danger" *ngIf="usr_tel.errors.invalidNumber">
+                    Value has to be a number.
+                  </span> -->
+            </div>
+            <button type="submit" [disabled]="!regForm.valid" class="w3-button w3-hover-red">Save</button>
+            <button type="reset" (click)="revert()" class="w3-button w3-blue">Revert</button>
+        </form>
+        <br>
+    </div>
+</div>
